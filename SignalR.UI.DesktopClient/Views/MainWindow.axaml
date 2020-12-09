@@ -1,0 +1,60 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:SignalR.UI.DesktopClient.ViewModels;assembly=SignalR.UI.DesktopClient"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="SignalR.UI.DesktopClient.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="SignalR.UI.DesktopClient">
+
+	<Design.DataContext>
+		<vm:MainWindowViewModel/>
+	</Design.DataContext>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="5" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="5" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="5" />
+		</Grid.RowDefinitions>
+		<DockPanel Grid.Row="1">
+			<Button DockPanel.Dock="Right" Content="Bağlan" 
+					Margin="0, 0, 5, 0" Command="{Binding Connect}" />
+			<TextBox DockPanel.Dock="Left" MaxLength="15" 
+					 Margin="5, 0, 5, 0" Watermark="Sunucu" AcceptsReturn="False"  Text="192.168.2.148"/>
+			<TextBox DockPanel.Dock="Left" MaxLength="20" 
+					 Margin="0, 0, 5, 0" Watermark="Kullanıcı Adı" AcceptsReturn="False"/>
+		</DockPanel>
+		<Grid Grid.Row="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200" />
+				<ColumnDefinition Width="10" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+			<ListBox Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+			<GridSplitter Grid.Column="1" />
+			<Border BorderBrush="Gray" BorderThickness="1" Grid.Column="2">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="100" />
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="0" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+							   Text="{Binding chatContent}" Background="AliceBlue" />
+					<Grid Grid.Row="1">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+						<TextBox Grid.Column="0" ScrollViewer.VerticalScrollBarVisibility="Auto" 
+								 AcceptsReturn="False" Watermark="Göndermek için bişeyler yazınız..." />
+						<Button Grid.Column="1" Content="Gönder" Command="{Binding Send}" />
+					</Grid>
+				</Grid>
+			</Border>
+		</Grid>
+	</Grid>
+</Window>
